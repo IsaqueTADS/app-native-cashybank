@@ -1,10 +1,11 @@
 import { Stack } from "expo-router";
 import "../global.css";
-
-import { useColorScheme } from "react-native";
-
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  return <Stack />
+  return (
+    <ThemeProvider>
+      <Stack />
+    </ThemeProvider>
+  );
 }
