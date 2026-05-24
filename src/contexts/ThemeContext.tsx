@@ -1,11 +1,13 @@
-import { vars, useColorScheme } from 'nativewind';
+import { useColorScheme, vars } from 'nativewind';
 import { View } from 'react-native';
 
-import { lightTheme, darkTheme } from '@/constants/design-tokens';
+import { darkTheme, lightTheme } from '@/constants/design-tokens';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const scheme = useColorScheme();
-  const themeStyle = scheme === 'dark' ? vars(darkTheme) : vars(lightTheme);
+
+  console.log(scheme.colorScheme)
+  const themeStyle = scheme.colorScheme === 'dark' ? vars(darkTheme) : vars(lightTheme);
 
   return <View style={[{ flex: 1 }, themeStyle]}>{children}</View>;
 }
