@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 
-import { MaterialIcons } from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "@/hooks/use-theme";
 
 export default function TabLayout() {
@@ -13,12 +13,26 @@ export default function TabLayout() {
         backgroundColor: theme.colors.background
       },
       tabBarActiveTintColor: theme.colors.accent,
-      tabBarInactiveTintColor: theme.colors.textMuted
+      tabBarInactiveTintColor: theme.colors.textMuted,
+      
+
     }} >
       <Tabs.Screen name="index" options={{
         title: "Home",
         tabBarIcon: ({ color }) => (
-            <MaterialIcons name="home" size={22} color={color} />
+            <Feather name="home" size={22} color={color} />
+          ),
+      }} />
+      <Tabs.Screen name="new-transaction" options={{
+        title: "Nova",
+        tabBarIcon: ({ color }) => (
+            <Feather name="plus-circle" size={22} color={color} />
+          ),
+      }} />
+      <Tabs.Screen name="profile" options={{
+        title: "Perfil",
+        tabBarIcon: ({ color }) => (
+            <MaterialIcons name="person" size={22} color={color} />
           ),
       }} />
     </Tabs>

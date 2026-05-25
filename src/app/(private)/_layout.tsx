@@ -6,14 +6,6 @@ export default function PrivateLayout() {
   const theme =  useTheme()
 
   return (
-   <Stack screenOptions={{
-      contentStyle: { backgroundColor: theme.colors.background },
-      headerStyle : {backgroundColor: theme.colors.background, },
-      headerTintColor: theme.colors.text,
-      headerShown: false
-    }}
-    >
-     <Stack.Screen name="(tabs)" options={{  title: "Home" }} />
-   </Stack>
+   <Stack screenOptions={{headerShown: false}} />
   );
 }
