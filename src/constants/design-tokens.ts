@@ -61,3 +61,35 @@ export const borderRadius = {
   lg: '14px',
   xl: '16px',
 };
+
+export const themeTokens = {
+  light: {
+    colors: {
+      background: lightTheme['--nyc-bg'],          
+      card: lightTheme['--nyc-card'],               
+      border: lightTheme['--nyc-border'],          
+      text: lightTheme['--nyc-text-primary'],       
+      textSecondary: lightTheme['--nyc-text-secondary'], 
+      textMuted: lightTheme['--nyc-text-muted'],    
+      accent: '#C4F82A',                           
+      accentText: '#0A0A0A',                       
+      negative: '#FA541C',                          
+      positive: '#C4F82A',                          
+    },
+  },
+  dark: {
+    colors: {
+      background: darkTheme['--nyc-bg'],            
+      card: darkTheme['--nyc-card'],                
+      border: darkTheme['--nyc-border'],            
+      text: darkTheme['--nyc-text-primary'],        
+      textSecondary: darkTheme['--nyc-text-secondary'], 
+      textMuted: darkTheme['--nyc-text-muted'],     
+      accent: '#C4F82A',
+      accentText: '#0A0A0A',
+      negative: '#FA541C',
+      positive: '#C4F82A',
+    },
+  },
+} as const;
+

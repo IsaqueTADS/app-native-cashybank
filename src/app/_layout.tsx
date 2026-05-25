@@ -1,11 +1,25 @@
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { useTheme } from "@/hooks/use-theme";
 import { Stack } from "expo-router";
 import "../global.css";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+
+function StackLayout() {
+  const theme = useTheme();
+  return (
+    <Stack screenOptions={{
+      contentStyle: { backgroundColor: theme.colors.background },
+      headerStyle : {backgroundColor: theme.colors.background, },
+      headerTintColor: theme.colors.text
+    }}>
+      <Stack.Screen name="(tab)" options={{ headerShown: true }} />
+    </Stack>
+  );
+}
 
 export default function RootLayout() {
   return (
     <ThemeProvider>
-      <Stack  />
+      <StackLayout />
     </ThemeProvider>
   );
 }

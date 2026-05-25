@@ -1,14 +1,14 @@
-/**
- * Learn more about light and dark modes:
- * https://docs.expo.dev/guides/color-schemes/
- */
+import { themeTokens } from "@/constants/design-tokens";
+import { useColorScheme } from "nativewind";
 
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+export type Theme = typeof themeTokens.light
 
-export function useTheme() {
-  const scheme = useColorScheme();
-  const theme = scheme === 'unspecified' ? 'light' : scheme;
 
-  return Colors[theme];
+export function useTheme(): Theme {
+
+  const { colorScheme} = useColorScheme()
+ 
+  return colorScheme === "dark" ? themeTokens.dark : themeTokens.light
 }
+
+export type ThemeColor = keyof Theme["colors"]
