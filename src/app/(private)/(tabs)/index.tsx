@@ -1,6 +1,7 @@
-import { Text, View } from "react-native";
+import { router } from "expo-router";
+import { Button, Text, View } from "react-native";
 
-export default function HomeScreen() {
+export default function Home() {
   return (
     <View className="flex-1 bg-nyc-bg items-center justify-center p-lg">
       <Text className="text-nyc-text-primary font-display text-3xl">
@@ -33,6 +34,10 @@ export default function HomeScreen() {
           </Text>
         </View>
       </View>
+
+         <Button title="Home" onPress={() => router.navigate("/")}/>
+      <Button title="Login" onPress={() => router.navigate("/login")}/>
+      <Button title="Register" onPress={() => router.navigate("/register")}/>
     </View>
   );
 }

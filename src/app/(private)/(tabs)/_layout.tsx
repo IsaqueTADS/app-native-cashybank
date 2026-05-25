@@ -15,7 +15,7 @@ export default function TabLayout() {
       tabBarActiveTintColor: theme.colors.accent,
       tabBarInactiveTintColor: theme.colors.textMuted
     }} >
-      <Tabs.Screen name="home" options={{
+      <Tabs.Screen name="index" options={{
         title: "Home",
         tabBarIcon: ({ color }) => (
             <MaterialIcons name="home" size={22} color={color} />

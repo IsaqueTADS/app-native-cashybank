@@ -2,7 +2,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { Stack } from "expo-router";
 
 
-export default function PrivateLayout() {
+export default function PublicLayout() {
   const theme =  useTheme()
 
   return (
@@ -10,10 +10,9 @@ export default function PrivateLayout() {
       contentStyle: { backgroundColor: theme.colors.background },
       headerStyle : {backgroundColor: theme.colors.background, },
       headerTintColor: theme.colors.text,
-      headerShown: false
+      headerShown: true
     }}
     >
-     <Stack.Screen name="(tabs)" options={{  title: "Home" }} />
    </Stack>
   );
 }
