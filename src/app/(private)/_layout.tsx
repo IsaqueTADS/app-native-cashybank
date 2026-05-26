@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function PrivateLayout() {
   const theme =  useTheme()
 
-  // const [user, setUser] = useState(true)
+  // const [user, setUser] = useState(undefined)
 
 
   // if(!user) return <Redirect href={"/login"} />

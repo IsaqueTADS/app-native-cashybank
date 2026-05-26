@@ -1,6 +1,5 @@
 import { useTheme } from "@/hooks/use-theme";
-import { Redirect, Stack } from "expo-router";
-import { useState } from "react";
+import { Stack } from "expo-router";
 
 
 export default function PublicLayout() {
