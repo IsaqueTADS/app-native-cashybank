@@ -1,10 +1,8 @@
-import { useTheme } from "@/hooks/use-theme";
 import { Redirect, Stack } from "expo-router";
 import { useState } from "react";
 
 
 export default function PrivateLayout() {
-  const theme =  useTheme()
 
   const [user, setUser] = useState(undefined)
 

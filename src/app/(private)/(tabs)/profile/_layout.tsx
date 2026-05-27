@@ -8,7 +8,7 @@ export default function ProfileLayout() {
   return (
    <Stack screenOptions={{headerShown: false, contentStyle: { backgroundColor: theme.colors.background },
       headerStyle : {backgroundColor: theme.colors.background, },
-      headerTintColor: theme.colors.text,}} >
+      headerTintColor: theme.colors.foreground,}} >
 
     <Stack.Screen name="index" options={{headerShown: true, title: "Perfil"}} />
    </Stack>

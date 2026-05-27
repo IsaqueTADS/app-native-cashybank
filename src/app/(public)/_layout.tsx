@@ -14,7 +14,7 @@ export default function PublicLayout() {
    <Stack screenOptions={{
       contentStyle: { backgroundColor: theme.colors.background },
       headerStyle : {backgroundColor: theme.colors.background, },
-      headerTintColor: theme.colors.text,
+      headerTintColor: theme.colors.foreground,
       headerShown: true
     }}
     >
