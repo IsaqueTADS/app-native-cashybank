@@ -13,10 +13,11 @@ interface AppInputParams<T extends FieldValues> extends TextInputProps {
 
 }
 
-export function AppInput<T extends FieldValues> ({control, name, leftIconName, label, ...rest}: AppInputParams<T>){
+export function AppInput<T extends FieldValues> ({control, name, leftIconName, label, secureTextEntry, ...rest}: AppInputParams<T>){
   const theme = useTheme()
   const inputRef = useRef<TextInput>(null)
   const [isFocused, setIsFocused] = useState(false)
+  const [showText, setShowText] = useState(secureTextEntry)
 
   function handleFocus(){
     if(inputRef.current){
@@ -38,9 +39,15 @@ export function AppInput<T extends FieldValues> ({control, name, leftIconName, l
        onFocus={handleFocus}
        onEndEditing={handleFocus}
        ref={inputRef}
+       secureTextEntry={showText}
        {...rest}
       />
+       {
+      secureTextEntry && <TouchableOpacity onPress={ () => setShowText((prev) => !prev)}><MaterialIcons name={showText ? "visibility" : "visibility-off"} size={22}  color={theme.colors.mutedForeground}/></TouchableOpacity>
+    }
     </TouchableOpacity>
+
+   
 
   </View>
   )}}/>
