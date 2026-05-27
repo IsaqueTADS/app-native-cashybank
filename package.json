@@ -7,6 +7,7 @@
     "@expo/vector-icons": "^15.0.2",
     "@hookform/resolvers": "^5.4.0",
     "babel-preset-expo": "^56.0.12",
+    "clsx": "^2.1.1",
     "expo": "~56.0.3",
     "expo-constants": "~56.0.14",
     "expo-dev-client": "~56.0.14",
@@ -45,6 +46,7 @@
   },
   "scripts": {
     "start": "expo start",
+    "dev:android": "expo start --dev-client",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
     "ios": "expo run:ios",

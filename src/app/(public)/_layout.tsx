@@ -15,7 +15,7 @@ export default function PublicLayout() {
       contentStyle: { backgroundColor: theme.colors.background },
       headerStyle : {backgroundColor: theme.colors.background, },
       headerTintColor: theme.colors.foreground,
-      headerShown: true
+      headerShown: false
     }}
     >
    </Stack>
