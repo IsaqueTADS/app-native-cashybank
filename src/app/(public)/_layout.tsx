@@ -1,3 +1,4 @@
+import { AuthHeader } from '@/components/AuthHeader'
 import { useTheme } from '@/hooks/use-theme'
 import { Stack } from 'expo-router'
 
@@ -14,8 +15,8 @@ export default function PublicLayout() {
         contentStyle: { backgroundColor: theme.colors.background },
         headerStyle: { backgroundColor: theme.colors.background },
         headerTintColor: theme.colors.foreground,
-        headerShown: false,
+        header: () => <AuthHeader />,
       }}
-    ></Stack>
+    />
   )
 }
