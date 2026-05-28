@@ -1,13 +1,13 @@
-import { DismissKeyboardView } from "@/components/DismissKeyBoardView";
-import { LoginForm } from "@/components/LoginForm";
-import { View } from "react-native";
+import { DismissKeyboardView } from '@/components/DismissKeyBoardView'
+import { LoginForm } from '@/components/LoginForm'
+import { View } from 'react-native'
 
-export default function Login (){
-  return <DismissKeyboardView>
-
-    <View className="flex-1 w-[82%] self-center " >
-      <LoginForm />
-    </View>
-    
-  </DismissKeyboardView>
+export default function Login() {
+  return (
+    <DismissKeyboardView>
+      <View className="w-[82%] flex-1 self-center ">
+        <LoginForm />
+      </View>
+    </DismissKeyboardView>
+  )
 }

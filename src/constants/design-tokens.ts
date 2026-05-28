@@ -12,7 +12,7 @@ export const colors = {
   'muted-foreground': 'var(--nyc-muted-foreground)',
   destructive: '#FA541C',
   'destructive-foreground': '#FFFFFF',
-};
+}
 
 export const lightTheme = {
   '--nyc-background': '#FFFFFF',
@@ -24,7 +24,7 @@ export const lightTheme = {
   '--nyc-input-foreground': '#60646C',
   '--nyc-muted': '#9CA3AF',
   '--nyc-muted-foreground': '#60646C',
-};
+}
 
 export const darkTheme = {
   '--nyc-background': '#0A0A0A',
@@ -36,7 +36,7 @@ export const darkTheme = {
   '--nyc-input-foreground': '#A1A1AA',
   '--nyc-muted': '#52525B',
   '--nyc-muted-foreground': '#A1A1AA',
-};
+}
 
 export const spacing = {
   xs: '4px',
@@ -44,12 +44,12 @@ export const spacing = {
   md: '12px',
   lg: '16px',
   xl: '24px',
-};
+}
 
 export const fontFamily = {
   display: ['Space Grotesk'],
   body: ['Manrope'],
-};
+}
 
 export const fontSize = {
   xs: ['12px', { lineHeight: '16px' }],
@@ -60,14 +60,14 @@ export const fontSize = {
   '2xl': ['24px', { lineHeight: '32px' }],
   '3xl': ['32px', { lineHeight: '40px' }],
   '4xl': ['40px', { lineHeight: '48px' }],
-};
+}
 
 export const borderRadius = {
   sm: '6px',
   md: '12px',
   lg: '14px',
   xl: '16px',
-};
+}
 
 export const themeTokens = {
   light: {
@@ -104,4 +104,4 @@ export const themeTokens = {
       destructiveForeground: '#FFFFFF',
     },
   },
-} as const;
+} as const
