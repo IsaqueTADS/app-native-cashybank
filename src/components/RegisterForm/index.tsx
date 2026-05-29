@@ -11,9 +11,11 @@ const registerFormSchema = z
     fullName: z.string('Prencha um valor').min(1, 'Prencha um valor'),
     email: z.email('O Email deve ser válido'),
     password: z.string('Prencha um valor').min(1, 'Prencha um valor'),
-    confirmPassword: z.string('Confirme sua senha').min(1, 'Confirme sua senha'),
+    confirmPassword: z
+      .string('Confirme sua senha')
+      .min(1, 'Confirme sua senha'),
   })
-  .refine(data => data.password === data.confirmPassword, {
+  .refine(data => data.password !== data.confirmPassword, {
     message: 'As senhas não coincidem',
     path: ['confirmPassword'],
   })
@@ -27,15 +29,15 @@ export function RegisterForm() {
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
-    mode: 'onTouched'
+    mode: 'onTouched',
   })
 
- function handleRegister(data: RegisterFormSchema) {
+  function handleRegister(data: RegisterFormSchema) {
     // Aqui os dados já chegam 100% validados pelo Zod
     console.log(data)
-    
+
     // Exemplo de navegação após sucesso
-    // router.assign('/login') 
+    // router.assign('/login')
   }
   return (
     <View className="mb-20 gap-4 ">
@@ -76,7 +78,12 @@ export function RegisterForm() {
         />
 
         <View className="mt-4">
-          <AppButton iconName="arrow-forward" onPress={handleSubmit(handleRegister)}>Registrar</AppButton>
+          <AppButton
+            iconName="arrow-forward"
+            onPress={handleSubmit(handleRegister)}
+          >
+            {isSubmitting ? 'Carregando...' : 'Registrar'}
+          </AppButton>
         </View>
       </View>
       <Text className="text-muted-foreground">Já tem uma conta?</Text>

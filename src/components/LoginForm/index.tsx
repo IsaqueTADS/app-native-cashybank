@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
@@ -7,7 +8,7 @@ import { AppInput } from '../AppInput'
 
 const loginFormSchema = z.object({
   email: z.email('O Email deve ser válido'),
-  password: z.string().min(1, 'Prencha um valor'),
+  password: z.string('Prencha um valor').min(1, 'Prencha um valor'),
 })
 
 type LoginFormSchema = z.infer<typeof loginFormSchema>
@@ -16,8 +17,15 @@ export function LoginForm() {
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<LoginFormSchema>()
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormSchema>({
+    resolver: zodResolver(loginFormSchema),
+    mode: 'onTouched',
+  })
+
+  function handleLogin(data: LoginFormSchema) {
+    console.log(data)
+  }
 
   return (
     <View className="gap-4 ">
@@ -28,6 +36,7 @@ export function LoginForm() {
           label="Email"
           placeholder="Example@gmail.com"
           leftIconName="email"
+          erroMessage={errors.email?.message}
         />
         <AppInput
           control={control}
@@ -36,10 +45,16 @@ export function LoginForm() {
           placeholder="Senha"
           leftIconName="lock-outline"
           secureTextEntry
+          erroMessage={errors.password?.message}
         />
 
         <View className="mt-4">
-          <AppButton iconName="arrow-forward">Entrar</AppButton>
+          <AppButton
+            iconName="arrow-forward"
+            onPress={handleSubmit(handleLogin)}
+          >
+            Entrar
+          </AppButton>
         </View>
       </View>
 
