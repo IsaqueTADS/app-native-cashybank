@@ -11,7 +11,12 @@ export function DismissKeyboardView({ children }: React.PropsWithChildren) {
     <SafeAreaView className="flex-1 bg-background">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView behavior="padding" className="flex-1">
-          <ScrollView>{children}</ScrollView>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+          >
+            {children}
+          </ScrollView>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </SafeAreaView>

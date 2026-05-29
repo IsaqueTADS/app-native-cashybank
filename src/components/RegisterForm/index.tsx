@@ -5,23 +5,32 @@ import { z } from 'zod'
 import { AppButton } from '../AppButton'
 import { AppInput } from '../AppInput'
 
-const loginFormSchema = z.object({
+const registerFormSchema = z.object({
+  full_name: z.string().min(1, 'Prencha um valor'),
   email: z.email('O Email deve ser válido'),
   password: z.string().min(1, 'Prencha um valor'),
+  confirm_password: z.string().min(1, 'Prencha um valor'),
 })
 
-type LoginFormSchema = z.infer<typeof loginFormSchema>
+type RegisterFormSchema = z.infer<typeof registerFormSchema>
 
-export function LoginForm() {
+export function RegisterForm() {
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<LoginFormSchema>()
+  } = useForm<RegisterFormSchema>()
 
   return (
-    <View className="gap-4 ">
+    <View className="gap-4 mb-20 ">
       <View className="mb-14 gap-7 rounded-lg bg-card p-7 ">
+        <AppInput
+          control={control}
+          name="full_name"
+          label="Nome Completo"
+          placeholder="Nome Sobrenome"
+          leftIconName="person"
+        />
         <AppInput
           control={control}
           name="email"
@@ -37,20 +46,28 @@ export function LoginForm() {
           leftIconName="lock-outline"
           secureTextEntry
         />
+        <AppInput
+          control={control}
+          name="confirm_password"
+          label="Senha"
+          placeholder="Confirme a Senha"
+          leftIconName="lock-outline"
+          secureTextEntry
+        />
 
         <View className="mt-4">
-          <AppButton iconName="arrow-forward">Entrar</AppButton>
+          <AppButton iconName="arrow-forward">Registrar</AppButton>
         </View>
       </View>
 
-      <Text className="text-muted-foreground">Não tem uma conta?</Text>
+      <Text className="text-muted-foreground">Já tem uma conta?</Text>
 
       <AppButton
         iconName="arrow-forward"
         variant="outline"
-        onPress={() => router.navigate('/register')}
+        onPress={() => router.navigate('/login')}
       >
-        Cadastre-se
+        Entrar
       </AppButton>
     </View>
   )
