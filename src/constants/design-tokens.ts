@@ -15,7 +15,7 @@ export const colors = {
 }
 
 export const lightTheme = {
-  '--nyc-background': '#FFFFFF',
+  '--nyc-background': '#EDEDED',
   '--nyc-foreground': '#0A0A0A',
   '--nyc-card': '#F0F0F3',
   '--nyc-card-foreground': '#0A0A0A',

@@ -10,12 +10,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import { Error } from '../Error'
 
 interface AppInputParams<T extends FieldValues> extends TextInputProps {
   control: Control<T>
   name: Path<T>
   leftIconName?: keyof typeof MaterialIcons.glyphMap
   label?: string
+  erroMessage?: string
 }
 
 export function AppInput<T extends FieldValues>({
@@ -24,6 +26,7 @@ export function AppInput<T extends FieldValues>({
   leftIconName,
   label,
   secureTextEntry,
+  erroMessage,
   ...rest
 }: AppInputParams<T>) {
   const theme = useTheme()
@@ -41,7 +44,7 @@ export function AppInput<T extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, value } }) => {
+      render={({ field: { onChange, onBlur, value } }) => {
         return (
           <View className="w-full">
             {label && (
@@ -57,9 +60,10 @@ export function AppInput<T extends FieldValues>({
 
             <TouchableOpacity
               className={clsx(
-                'flex-row items-center gap-2  rounded-lg border bg-transparent px-4 py-1.5',
+                'mb-1 flex-row items-center  gap-2 rounded-lg border bg-transparent px-4 py-1.5',
                 isFocused ? 'border-primary' : 'border-border',
               )}
+              onPress={() => inputRef.current?.focus()}
             >
               {leftIconName && (
                 <MaterialIcons
@@ -74,7 +78,8 @@ export function AppInput<T extends FieldValues>({
               )}
               <TextInput
                 value={value}
-                onChange={onChange}
+                onChangeText={onChange}
+                onBlur={onBlur}
                 className="flex-1 text-xl text-input-foreground"
                 placeholderTextColor={theme.colors.muted}
                 onFocus={handleFocus}
@@ -93,6 +98,7 @@ export function AppInput<T extends FieldValues>({
                 </TouchableOpacity>
               )}
             </TouchableOpacity>
+            {erroMessage && <Error> {erroMessage}</Error>}
           </View>
         )
       }}
