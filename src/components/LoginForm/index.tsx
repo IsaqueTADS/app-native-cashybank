@@ -36,6 +36,10 @@ export function LoginForm() {
           leftIconName="lock-outline"
           secureTextEntry
         />
+
+        <View className='mt-4'>
+          <AppButton iconName="arrow-forward">Entrar</AppButton>
+        </View>
       </View>
 
       <Text className="text-muted-foreground">Não tem uma conta?</Text>
