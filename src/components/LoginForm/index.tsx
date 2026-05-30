@@ -1,3 +1,4 @@
+import { useAuthContext } from '@/contexts/auth-context'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
@@ -11,7 +12,7 @@ const loginFormSchema = z.object({
   password: z.string('Prencha um valor').min(1, 'Prencha um valor'),
 })
 
-type LoginFormSchema = z.infer<typeof loginFormSchema>
+export type LoginFormSchema = z.infer<typeof loginFormSchema>
 
 export function LoginForm() {
   const {
@@ -22,6 +23,10 @@ export function LoginForm() {
     resolver: zodResolver(loginFormSchema),
     mode: 'onTouched',
   })
+
+  const { user } = useAuthContext()
+
+  console.log(user)
 
   function handleLogin(data: LoginFormSchema) {
     console.log(data)

@@ -1,3 +1,4 @@
+import { AuthContextProvider } from '@/contexts/auth-context'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { useTheme } from '@/hooks/use-theme'
 import { Stack } from 'expo-router'
@@ -20,7 +21,9 @@ function StackLayout() {
 export default function RootLayout() {
   return (
     <ThemeProvider>
-      <StackLayout />
+      <AuthContextProvider>
+        <StackLayout />
+      </AuthContextProvider>
     </ThemeProvider>
   )
 }
