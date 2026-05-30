@@ -17,7 +17,7 @@ export function LoginForm() {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
     mode: 'onTouched',
@@ -36,7 +36,6 @@ export function LoginForm() {
           label="Email"
           placeholder="Example@gmail.com"
           leftIconName="email"
-          erroMessage={errors.email?.message}
         />
         <AppInput
           control={control}
@@ -45,7 +44,6 @@ export function LoginForm() {
           placeholder="Senha"
           leftIconName="lock-outline"
           secureTextEntry
-          erroMessage={errors.password?.message}
         />
 
         <View className="mt-4">

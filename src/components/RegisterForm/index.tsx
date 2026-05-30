@@ -26,7 +26,7 @@ export function RegisterForm() {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     mode: 'onTouched',
@@ -48,7 +48,6 @@ export function RegisterForm() {
           label="Nome Completo"
           placeholder="Nome Sobrenome"
           leftIconName="person"
-          erroMessage={errors.fullName?.message}
         />
         <AppInput
           control={control}
@@ -56,7 +55,6 @@ export function RegisterForm() {
           label="Email"
           placeholder="Example@gmail.com"
           leftIconName="email"
-          erroMessage={errors.email?.message}
         />
         <AppInput
           control={control}
@@ -65,7 +63,6 @@ export function RegisterForm() {
           placeholder="Senha"
           leftIconName="lock-outline"
           secureTextEntry
-          erroMessage={errors.password?.message}
         />
         <AppInput
           control={control}
@@ -74,7 +71,6 @@ export function RegisterForm() {
           placeholder="Confirme sua Senha"
           leftIconName="lock-outline"
           secureTextEntry
-          erroMessage={errors.confirmPassword?.message}
         />
 
         <View className="mt-4">

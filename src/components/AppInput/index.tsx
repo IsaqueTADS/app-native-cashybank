@@ -17,7 +17,6 @@ interface AppInputParams<T extends FieldValues> extends TextInputProps {
   name: Path<T>
   leftIconName?: keyof typeof MaterialIcons.glyphMap
   label?: string
-  erroMessage?: string
 }
 
 export function AppInput<T extends FieldValues>({
@@ -26,7 +25,6 @@ export function AppInput<T extends FieldValues>({
   leftIconName,
   label,
   secureTextEntry,
-  erroMessage,
   ...rest
 }: AppInputParams<T>) {
   const theme = useTheme()
@@ -44,7 +42,10 @@ export function AppInput<T extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, onBlur, value } }) => {
+      render={({
+        field: { onChange, onBlur, value },
+        fieldState: { error },
+      }) => {
         return (
           <View className="w-full">
             {label && (
@@ -98,7 +99,7 @@ export function AppInput<T extends FieldValues>({
                 </TouchableOpacity>
               )}
             </TouchableOpacity>
-            {erroMessage && <Error> {erroMessage}</Error>}
+            {error && <Error> {error.message}</Error>}
           </View>
         )
       }}
