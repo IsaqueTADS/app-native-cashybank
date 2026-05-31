@@ -24,12 +24,14 @@ export function LoginForm() {
     mode: 'onTouched',
   })
 
-  const { user } = useAuthContext()
+  const { user, handleAutenticate } = useAuthContext()
 
   console.log(user)
 
-  function handleLogin(data: LoginFormSchema) {
+  async function handleLogin(data: LoginFormSchema) {
     console.log(data)
+
+    await handleAutenticate(data)
   }
 
   return (

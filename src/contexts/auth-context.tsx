@@ -1,5 +1,6 @@
 import { LoginFormSchema } from '@/components/LoginForm'
 import { RegisterFormSchema } from '@/components/RegisterForm'
+import { authenticateService } from '@/services/cashybank/auth-services'
 import { createContext, useContext, useState } from 'react'
 
 type AuthContextType = {
@@ -16,7 +17,14 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(null)
 
-  async function handleAutenticate({ email, password }: LoginFormSchema) {}
+  async function handleAutenticate({ email, password }: LoginFormSchema) {
+    const response = await authenticateService({
+      email,
+      password,
+    })
+
+    console.log(response)
+  }
 
   async function handleRegister({
     fullName,
