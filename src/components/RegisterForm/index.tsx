@@ -15,7 +15,7 @@ const registerFormSchema = z
       .string('Confirme sua senha')
       .min(1, 'Confirme sua senha'),
   })
-  .refine(data => data.password !== data.confirmPassword, {
+  .refine(data => data.password === data.confirmPassword, {
     message: 'As senhas não coincidem',
     path: ['confirmPassword'],
   })
@@ -30,14 +30,16 @@ export function RegisterForm() {
   } = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     mode: 'onTouched',
+    defaultValues: {
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
   })
 
   function handleRegister(data: RegisterFormSchema) {
-    // Aqui os dados já chegam 100% validados pelo Zod
     console.log(data)
-
-    // Exemplo de navegação após sucesso
-    // router.assign('/login')
   }
   return (
     <View className="mb-20 gap-4 ">
@@ -67,7 +69,7 @@ export function RegisterForm() {
         <AppInput
           control={control}
           name="confirmPassword"
-          label="Senha"
+          label="Confirmar a Senha"
           placeholder="Confirme sua Senha"
           leftIconName="lock-outline"
           secureTextEntry
