@@ -8,7 +8,7 @@ import { IAuthResponse } from '@/shared/interfaces/https/auth-response'
 import { IUser } from '@/shared/interfaces/user-interface'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { router } from 'expo-router'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 type AuthContextType = {
   user: IUser | null
@@ -16,7 +16,7 @@ type AuthContextType = {
   handleAutenticate: (params: LoginFormSchema) => Promise<void>
   handleUserRegister: (params: RegisterFormSchema) => Promise<void>
   handleLogout: () => void
-  restoreUserSession(): Promise<string | null>
+  isRestoringSession: boolean
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null)
@@ -24,6 +24,7 @@ export const AuthContext = createContext<AuthContextType | null>(null)
 export function AuthContextProvider({ children }: React.PropsWithChildren) {
   const [user, setUser] = useState<IUser | null>(null)
   const [token, setToken] = useState<string | null>(null)
+  const [isRestoringSession, setIsRestoringSession] = useState(true)
 
   async function handleAutenticate({ email, password }: LoginFormSchema) {
     const { user, token } = await authenticateService({
@@ -32,7 +33,10 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
     })
     setUser(user)
     setToken(token)
-    await AsyncStorage.setItem('cashybank-user', JSON.stringify(user))
+    await AsyncStorage.setItem(
+      'cashybank-user',
+      JSON.stringify({ user, token }),
+    )
   }
 
   async function handleUserRegister({
@@ -45,23 +49,35 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
   }
 
   async function handleLogout() {
-    await AsyncStorage.removeItem('cashybank-user')
+    await AsyncStorage.clear()
     setUser(null)
     setToken(null)
     router.navigate('/')
   }
 
-  async function restoreUserSession() {
-    const userData = await AsyncStorage.getItem('cashybank-user')
+  useEffect(() => {
+    async function restoreUserSession() {
+      try {
+        const userData = await AsyncStorage.getItem('cashybank-user')
 
-    if (userData) {
-      const { token, user } = JSON.parse(userData) as IAuthResponse
-      setUser(user)
-      setToken(token)
+        if (userData) {
+          const { token, user } = JSON.parse(userData) as IAuthResponse
+          setUser(user)
+          setToken(token)
+        } else {
+          await handleLogout()
+        }
+
+        return userData
+      } catch {
+        await handleLogout()
+      } finally {
+        setIsRestoringSession(false)
+      }
     }
 
-    return userData
-  }
+    restoreUserSession()
+  }, [])
 
   return (
     <AuthContext.Provider
@@ -71,7 +87,7 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
         handleAutenticate,
         handleUserRegister,
         handleLogout,
-        restoreUserSession
+        isRestoringSession,
       }}
     >
       {children}

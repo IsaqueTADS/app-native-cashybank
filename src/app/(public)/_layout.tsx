@@ -6,7 +6,7 @@ export default function PublicLayout() {
   const theme = useTheme()
   const { user, token } = useAuthContext()
 
-  if (user && token) return <Redirect href={'/'} />
+  if (user && token) return <Redirect href={'/profile'} />
 
   return (
     <Stack

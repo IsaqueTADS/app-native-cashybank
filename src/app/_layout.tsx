@@ -1,4 +1,5 @@
-import { AuthContextProvider } from '@/contexts/auth-context'
+import { LoadingScreen } from '@/components/LoadingScreen'
+import { AuthContextProvider, useAuthContext } from '@/contexts/auth-context'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { useTheme } from '@/hooks/use-theme'
 import { Stack } from 'expo-router'
@@ -6,7 +7,11 @@ import '../global.css'
 
 function StackLayout() {
   const theme = useTheme()
-  return (
+  const { isRestoringSession } = useAuthContext()
+
+  return isRestoringSession ? (
+    <LoadingScreen />
+  ) : (
     <Stack
       screenOptions={{
         contentStyle: { backgroundColor: theme.colors.background },
