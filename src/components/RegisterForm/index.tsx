@@ -88,8 +88,9 @@ export function RegisterForm() {
           <AppButton
             iconName="arrow-forward"
             onPress={handleSubmit(handleRegister)}
+            isLoading={isSubmitting}
           >
-            {isSubmitting ? 'Carregando...' : 'Registrar'}
+            Registrar
           </AppButton>
         </View>
       </View>

@@ -4,7 +4,10 @@ import {
   authenticateService,
   registerService,
 } from '@/services/cashybank/auth-services'
+import { IAuthResponse } from '@/shared/interfaces/https/auth-response'
 import { IUser } from '@/shared/interfaces/user-interface'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { router } from 'expo-router'
 import { createContext, useContext, useState } from 'react'
 
 type AuthContextType = {
@@ -13,6 +16,7 @@ type AuthContextType = {
   handleAutenticate: (params: LoginFormSchema) => Promise<void>
   handleUserRegister: (params: RegisterFormSchema) => Promise<void>
   handleLogout: () => void
+  restoreUserSession(): Promise<string | null>
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null)
@@ -28,6 +32,7 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
     })
     setUser(user)
     setToken(token)
+    await AsyncStorage.setItem('cashybank-user', JSON.stringify(user))
   }
 
   async function handleUserRegister({
@@ -39,7 +44,24 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
     await handleAutenticate({ email, password })
   }
 
-  function handleLogout() {}
+  async function handleLogout() {
+    await AsyncStorage.removeItem('cashybank-user')
+    setUser(null)
+    setToken(null)
+    router.navigate('/')
+  }
+
+  async function restoreUserSession() {
+    const userData = await AsyncStorage.getItem('cashybank-user')
+
+    if (userData) {
+      const { token, user } = JSON.parse(userData) as IAuthResponse
+      setUser(user)
+      setToken(token)
+    }
+
+    return userData
+  }
 
   return (
     <AuthContext.Provider
@@ -49,6 +71,7 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
         handleAutenticate,
         handleUserRegister,
         handleLogout,
+        restoreUserSession
       }}
     >
       {children}
