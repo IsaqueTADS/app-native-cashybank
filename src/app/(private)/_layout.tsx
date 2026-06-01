@@ -1,10 +1,10 @@
+import { useAuthContext } from '@/contexts/auth-context'
 import { Redirect, Stack } from 'expo-router'
-import { useState } from 'react'
 
 export default function PrivateLayout() {
-  const [user, setUser] = useState(undefined)
+  const { user, token } = useAuthContext()
 
-  if (!user) return <Redirect href={'/login'} />
+  if (!user || !token) return <Redirect href={'/login'} />
 
   return <Stack screenOptions={{ headerShown: false }} />
 }

@@ -1,12 +1,12 @@
+import { useAuthContext } from '@/contexts/auth-context'
 import { useTheme } from '@/hooks/use-theme'
-import { Stack } from 'expo-router'
+import { Redirect, Stack } from 'expo-router'
 
 export default function PublicLayout() {
   const theme = useTheme()
+  const { user, token } = useAuthContext()
 
-  //  const [user, setUser] = useState(true)
-
-  //   if(user) return <Redirect href={"/"} />
+  if (user && token) return <Redirect href={'/'} />
 
   return (
     <Stack
@@ -14,7 +14,7 @@ export default function PublicLayout() {
         contentStyle: { backgroundColor: theme.colors.background },
         headerStyle: { backgroundColor: theme.colors.background },
         headerTintColor: theme.colors.foreground,
-        headerShown: false
+        headerShown: false,
       }}
     />
   )
