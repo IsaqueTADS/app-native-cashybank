@@ -70,9 +70,11 @@ export function AppInput<T extends FieldValues>({
                 <MaterialIcons
                   name={leftIconName}
                   color={
-                    isFocused
-                      ? theme.colors.primary
-                      : theme.colors.mutedForeground
+                    error
+                      ? theme.colors.destructive
+                      : isFocused
+                        ? theme.colors.primary
+                        : theme.colors.mutedForeground
                   }
                   size={22}
                 />
@@ -81,7 +83,10 @@ export function AppInput<T extends FieldValues>({
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}
-                className="flex-1 text-xl text-input-foreground"
+                className={clsx(
+                  'flex-1 text-xl ',
+                  error ? 'text-destructive' : 'text-input-foreground',
+                )}
                 placeholderTextColor={theme.colors.muted}
                 onFocus={handleFocus}
                 onEndEditing={handleFocus}

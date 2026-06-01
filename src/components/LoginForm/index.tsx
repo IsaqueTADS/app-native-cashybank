@@ -1,5 +1,6 @@
 import { useAuthContext } from '@/contexts/auth-context'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AxiosError } from 'axios'
 import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
@@ -24,14 +25,16 @@ export function LoginForm() {
     mode: 'onTouched',
   })
 
-  const { user, handleAutenticate } = useAuthContext()
-
-  console.log(user)
+  const { handleAutenticate } = useAuthContext()
 
   async function handleLogin(data: LoginFormSchema) {
-    console.log(data)
-
-    await handleAutenticate(data)
+    try {
+      await handleAutenticate(data)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data)
+      }
+    }
   }
 
   return (
@@ -57,6 +60,7 @@ export function LoginForm() {
           <AppButton
             iconName="arrow-forward"
             onPress={handleSubmit(handleLogin)}
+            isLoading={isSubmitting}
           >
             Entrar
           </AppButton>
