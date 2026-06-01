@@ -1,4 +1,6 @@
+import { useAuthContext } from '@/contexts/auth-context'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AxiosError } from 'axios'
 import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
@@ -37,9 +39,16 @@ export function RegisterForm() {
       confirmPassword: '',
     },
   })
+  const { handleUserRegister } = useAuthContext()
 
-  function handleRegister(data: RegisterFormSchema) {
-    console.log(data)
+  async function handleRegister(data: RegisterFormSchema) {
+    try {
+      await handleUserRegister(data)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data)
+      }
+    }
   }
   return (
     <View className="mb-20 gap-4 ">

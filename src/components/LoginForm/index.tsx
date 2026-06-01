@@ -23,6 +23,10 @@ export function LoginForm() {
   } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
     mode: 'onTouched',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   })
 
   const { handleAutenticate } = useAuthContext()

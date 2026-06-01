@@ -1,6 +1,9 @@
 import { LoginFormSchema } from '@/components/LoginForm'
 import { RegisterFormSchema } from '@/components/RegisterForm'
-import { authenticateService } from '@/services/cashybank/auth-services'
+import {
+  authenticateService,
+  registerService,
+} from '@/services/cashybank/auth-services'
 import { IUser } from '@/shared/interfaces/user-interface'
 import { createContext, useContext, useState } from 'react'
 
@@ -8,7 +11,7 @@ type AuthContextType = {
   user: IUser | null
   token: string | null
   handleAutenticate: (params: LoginFormSchema) => Promise<void>
-  handleRegister: (params: RegisterFormSchema) => Promise<void>
+  handleUserRegister: (params: RegisterFormSchema) => Promise<void>
   handleLogout: () => void
 }
 
@@ -27,11 +30,14 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
     setToken(token)
   }
 
-  async function handleRegister({
+  async function handleUserRegister({
     fullName,
     email,
     password,
-  }: RegisterFormSchema) {}
+  }: RegisterFormSchema) {
+    await registerService({ fullName, email, password })
+    await handleAutenticate({ email, password })
+  }
 
   function handleLogout() {}
 
@@ -41,7 +47,7 @@ export function AuthContextProvider({ children }: React.PropsWithChildren) {
         user,
         token,
         handleAutenticate,
-        handleRegister,
+        handleUserRegister,
         handleLogout,
       }}
     >
