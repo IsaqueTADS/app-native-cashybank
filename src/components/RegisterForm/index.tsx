@@ -13,7 +13,7 @@ const registerFormSchema = z
   .object({
     fullName: z.string('Prencha um valor').min(1, 'Prencha um valor'),
     email: z.email('O Email deve ser válido'),
-    password: z.string('Prencha um valor').min(1, 'Prencha um valor'),
+    password: z.string('Prencha um valor').min(8, 'A senha deve ter no minimo 8 caracteres'),
     confirmPassword: z
       .string('Confirme sua senha')
       .min(1, 'Confirme sua senha'),
