@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native'
+import { twMerge } from 'tailwind-merge'
 
 interface AppButtonParams extends TouchableOpacityProps {
   variant?: 'default' | 'outline'
@@ -26,6 +27,7 @@ export function AppButton({
   iconName,
   variant = 'default',
   isLoading = false,
+  className = '',
   disabled,
   ...rest
 }: React.PropsWithChildren<AppButtonParams>) {
@@ -37,12 +39,15 @@ export function AppButton({
     <TouchableOpacity
       {...rest}
       disabled={isDisabled}
-      className={clsx(
-        'w-full flex-row items-center rounded-md px-4 py-4',
-        variants.variant[variant],
-        isLoading ? 'justify-center opacity-70' : '',
-        !isLoading && iconName ? 'justify-between' : 'justify-center',
-        isDisabled && 'opacity-50',
+      className={twMerge(
+        clsx(
+          'w-full flex-row items-center rounded-md px-4 py-4',
+          variants.variant[variant],
+          isLoading ? 'justify-center opacity-70' : '',
+          !isLoading && iconName ? 'justify-between' : 'justify-center',
+          isDisabled && 'opacity-50',
+          className,
+        ),
       )}
     >
       {isLoading ? (

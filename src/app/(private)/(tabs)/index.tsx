@@ -1,43 +1,42 @@
-import { router } from "expo-router";
-import { Button, Text, View } from "react-native";
+import { router } from 'expo-router'
+import { Button, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Home() {
   return (
-    <View className="flex-1 bg-background items-center justify-center p-lg">
-      <Text className="text-foreground font-display text-3xl">
-        CashyBank
-      </Text>
-      <Text className="text-muted-foreground font-body text-base mt-md">
+    <SafeAreaView className="flex-1 items-center justify-center bg-background p-8">
+      <Text className="font-display text-3xl text-foreground">CashyBank</Text>
+      <Text className="mt-md font-body text-base text-muted-foreground">
         Saldo disponível
       </Text>
-      <Text className="text-primary font-display text-4xl font-bold mt-lg">
+      <Text className="mt-lg font-display text-4xl font-bold text-primary">
         R$ 1.250,00
       </Text>
-      <View className="bg-card rounded-md p-lg mt-xl w-full">
-        <Text className="text-foreground font-display text-lg">
+      <View className="mt-xl w-full rounded-md bg-card p-lg">
+        <Text className="font-display text-lg text-foreground">
           Últimas transações
         </Text>
-        <View className="bg-border h-px my-md" />
-        <Text className="text-muted-foreground font-body text-sm">
+        <View className="my-md h-px bg-border" />
+        <Text className="font-body text-sm text-muted-foreground">
           Nenhuma transação recente
         </Text>
       </View>
-      <View className="flex-row gap-md mt-lg">
-        <View className="bg-primary rounded-sm px-xl py-md">
-          <Text className="text-primary-foreground font-display text-base font-bold">
+      <View className="mt-lg flex-row gap-md">
+        <View className="rounded-sm bg-primary px-xl py-md">
+          <Text className="font-display text-base font-bold text-primary-foreground">
             Entrada
           </Text>
         </View>
-        <View className="bg-destructive rounded-sm px-xl py-md">
-          <Text className="text-destructive-foreground font-display text-base font-bold">
+        <View className="rounded-sm bg-destructive px-xl py-md">
+          <Text className="font-display text-base font-bold text-destructive-foreground">
             Saída
           </Text>
         </View>
       </View>
 
-         <Button title="Home" onPress={() => router.navigate("/")}/>
-      <Button title="Login" onPress={() => router.navigate("/login")}/>
-      <Button title="Register" onPress={() => router.navigate("/register")}/>
-    </View>
-  );
+      <Button title="Home" onPress={() => router.navigate('/')} />
+      <Button title="Login" onPress={() => router.navigate('/login')} />
+      <Button title="Register" onPress={() => router.navigate('/register')} />
+    </SafeAreaView>
+  )
 }

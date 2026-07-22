@@ -1,10 +1,12 @@
-import { AppButton } from '@/components/AppButton'
+import { AppRow } from '@/components/AppRow'
+import { List } from '@/components/List'
 import { useAuthContext } from '@/contexts/auth-context'
-import { router } from 'expo-router'
+import { useTheme } from '@/hooks/use-theme'
 import { Text, View } from 'react-native'
 
 export default function Profile() {
   const { handleLogout, user } = useAuthContext()
+  const theme = useTheme()
 
   console.log(user)
   return (
@@ -16,10 +18,17 @@ export default function Profile() {
           {new Date(user?.created_at || '').toLocaleDateString()}
         </Text>
         <View className="mt-[100px]">
-          <AppButton variant="outline" onPress={()=> router.navigate("/profile/settings")}>Configuração</AppButton>
+          <AppRow
+            label="Sair da conta"
+            labelColor={theme.colors.destructive}
+            iconColor={theme.colors.destructive}
+            iconName="log-out"
+            onPress={handleLogout}
+
+            <List />
+          />
         </View>
       </View>
-      <AppButton onPress={handleLogout}>Sair</AppButton>
     </View>
   )
 }
