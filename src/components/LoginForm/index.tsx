@@ -7,6 +7,7 @@ import { Text, View } from 'react-native'
 import { z } from 'zod'
 import { AppButton } from '../AppButton'
 import { AppInput } from '../AppInput'
+import { AppError } from '@/shared/helpers/AppError'
 
 const loginFormSchema = z.object({
   email: z.email('O Email deve ser válido'),
@@ -35,6 +36,7 @@ export function LoginForm() {
     try {
       await handleAutenticate(data)
     } catch (error) {
+      console.log(error.message)
       if (error instanceof AxiosError) {
         console.log(error.response?.data)
       }

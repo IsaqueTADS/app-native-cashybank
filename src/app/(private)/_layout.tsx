@@ -6,5 +6,5 @@ export default function PrivateLayout() {
 
   if (!user || !token) return <Redirect href={'/login'} />
 
-  return <Stack screenOptions={{ headerShown: false }} />
+  return <Stack screenOptions={{ headerShown: false}} />
 }

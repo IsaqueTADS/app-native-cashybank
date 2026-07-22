@@ -11,6 +11,7 @@ export default function ProfileLayout() {
       headerTintColor: theme.colors.foreground,}} >
 
     <Stack.Screen name="index" options={{headerShown: true, title: "Perfil"}} />
+    <Stack.Screen name="settings" options={{headerShown: true, title: "Configuração"}} />
    </Stack>
   );
 }

@@ -6,7 +6,7 @@ import { View } from 'react-native'
 export default function Login() {
   return (
     <DismissKeyboardView>
-      <View className="w-[82%] flex-1 self-center ">
+      <View className="w-[82%] flex-1 self-center">
         <AuthHeader />
         <LoginForm />
       </View>
