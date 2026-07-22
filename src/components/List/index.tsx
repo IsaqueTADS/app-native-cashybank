@@ -1,8 +1,8 @@
-import { Text, View, FlatList, FlatListProps } from 'react-native'
 import { clsx } from 'clsx'
+import { FlatList, FlatListProps, Text, View } from 'react-native'
 
 type Props<T> = FlatListProps<T> & {
-  title: string
+  title?: string
   emptyMessage?: string
 }
 
@@ -16,9 +16,12 @@ export function List<T>({
 }: Props<T>) {
   return (
     <View className={clsx('flex-1', className)}>
-      <Text className="mb-4 mt-6 border-b border-border pb-4 font-body text-base text-foreground">
-        {title}
-      </Text>
+      {title && (
+        <Text className="mb-4 mt-6  pb-4 font-body text-base text-foreground">
+          {title}
+        </Text>
+      )}
+      <View className='border-b border-border'/>
       <FlatList
         data={data}
         renderItem={renderItem}
