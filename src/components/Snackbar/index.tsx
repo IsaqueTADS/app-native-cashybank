@@ -8,7 +8,7 @@ import Animated, {
 } from 'react-native-reanimated'
 
 export function Snackbar() {
-  const { visible, message } = useSnackbarContext()
+  const { visible, message, type } = useSnackbarContext()
 
   const translateY = useSharedValue(100)
   const opacity = useSharedValue(0)
@@ -30,10 +30,12 @@ export function Snackbar() {
 
   if (!visible) return <></>
 
+  const bgColor = `${type === "SUCCESS"  ? "bg-primary"   : "bg-destructive"}`
+
   return (
     <Animated.View
       style={animatedStyle}
-      className="absolute bottom-10 z-10 flex h-[50px] w-[90%] items-center justify-center self-center rounded-xl bg-destructive p-2"
+      className={`absolute bottom-10 z-10 flex h-[50px] w-[90%] items-center justify-center self-center rounded-xl p-2 ${bgColor}`}
     >
       <Text className="text-bold text-base text-white">{message}</Text>
     </Animated.View>

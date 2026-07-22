@@ -31,14 +31,14 @@ export function LoginForm() {
   })
 
   const { handleAutenticate } = useAuthContext()
-  const { show } = useSnackbarContext()
+  const { notify } = useSnackbarContext()
 
   async function handleLogin(data: LoginFormSchema) {
     try {
       await handleAutenticate(data)
     } catch (error) {
       if (error instanceof AppError) {
-        show(error.message)
+        notify(error.message)
       }
     }
   }
