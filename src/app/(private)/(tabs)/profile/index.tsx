@@ -2,6 +2,7 @@ import { AppRow } from '@/components/AppRow'
 import { List } from '@/components/List'
 import { useAuthContext } from '@/contexts/auth-context'
 import { useTheme } from '@/hooks/use-theme'
+import { router } from 'expo-router'
 import { Text, View } from 'react-native'
 
 export default function Profile() {
@@ -10,8 +11,15 @@ export default function Profile() {
 
   const MENU_ITEMS = [
     { LABEL: 'Dados pessoais', ICON: 'user' as const, SHOW_ARROW: true },
+    {
+      LABEL: 'Configuração',
+      ICON: 'settings' as const,
+      SHOW_ARROW: true,
+      ON_PRESS: () => {
+        router.navigate('/profile/settings')
+      },
+    },
     { LABEL: 'Segurança', ICON: 'shield' as const, SHOW_ARROW: true },
-    { LABEL: 'Notificações', ICON: 'bell' as const, SHOW_ARROW: true },
     { LABEL: 'Ajuda', ICON: 'info' as const, SHOW_ARROW: true },
     {
       LABEL: 'Sair da conta',
