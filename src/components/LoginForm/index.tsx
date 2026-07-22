@@ -1,13 +1,13 @@
 import { useAuthContext } from '@/contexts/auth-context'
+import { useSnackbarContext } from '@/contexts/snackbar-context'
+import { AppError } from '@/shared/helpers/AppError'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AxiosError } from 'axios'
 import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
 import { z } from 'zod'
 import { AppButton } from '../AppButton'
 import { AppInput } from '../AppInput'
-import { AppError } from '@/shared/helpers/AppError'
 
 const loginFormSchema = z.object({
   email: z.email('O Email deve ser válido'),
@@ -31,14 +31,14 @@ export function LoginForm() {
   })
 
   const { handleAutenticate } = useAuthContext()
+  const { show } = useSnackbarContext()
 
   async function handleLogin(data: LoginFormSchema) {
     try {
       await handleAutenticate(data)
     } catch (error) {
-      console.log(error.message)
-      if (error instanceof AxiosError) {
-        console.log(error.response?.data)
+      if (error instanceof AppError) {
+        show(error.message)
       }
     }
   }

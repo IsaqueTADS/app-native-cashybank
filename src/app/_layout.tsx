@@ -1,9 +1,11 @@
 import { LoadingScreen } from '@/components/LoadingScreen'
 import { AuthContextProvider, useAuthContext } from '@/contexts/auth-context'
+import { SnackbarProvider } from '@/contexts/snackbar-context'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { useTheme } from '@/hooks/use-theme'
 import { Stack } from 'expo-router'
 import '../global.css'
+import { Snackbar } from '@/components/Snackbar'
 
 function StackLayout() {
   const theme = useTheme()
@@ -25,10 +27,13 @@ function StackLayout() {
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <AuthContextProvider>
-        <StackLayout />
-      </AuthContextProvider>
-    </ThemeProvider>
+    <SnackbarProvider>
+      <ThemeProvider>
+        <AuthContextProvider>
+          <StackLayout />
+          <Snackbar />
+        </AuthContextProvider>
+      </ThemeProvider>
+    </SnackbarProvider>
   )
 }
