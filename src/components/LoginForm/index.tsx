@@ -1,6 +1,5 @@
 import { useAuthContext } from '@/contexts/auth-context'
-import { useSnackbarContext } from '@/contexts/snackbar-context'
-import { AppError } from '@/shared/helpers/AppError'
+import { useErrorHanlder } from '@/hooks/useErrorHandler'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
@@ -31,15 +30,13 @@ export function LoginForm() {
   })
 
   const { handleAutenticate } = useAuthContext()
-  const { notify } = useSnackbarContext()
+  const { handleError } = useErrorHanlder()
 
   async function handleLogin(data: LoginFormSchema) {
     try {
       await handleAutenticate(data)
     } catch (error) {
-      if (error instanceof AppError) {
-        notify(error.message)
-      }
+      handleError(error)
     }
   }
 

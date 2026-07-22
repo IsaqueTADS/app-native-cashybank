@@ -1,4 +1,5 @@
 import { useAuthContext } from '@/contexts/auth-context'
+import { useErrorHanlder } from '@/hooks/useErrorHandler'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
 import { router } from 'expo-router'
@@ -40,14 +41,13 @@ export function RegisterForm() {
     },
   })
   const { handleUserRegister } = useAuthContext()
+  const { handleError } = useErrorHanlder()
 
   async function handleRegister(data: RegisterFormSchema) {
     try {
       await handleUserRegister(data)
     } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error.response?.data)
-      }
+      handleError(error)
     }
   }
   return (
