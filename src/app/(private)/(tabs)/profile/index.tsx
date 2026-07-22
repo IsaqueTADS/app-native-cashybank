@@ -3,7 +3,7 @@ import { List } from '@/components/List'
 import { useAuthContext } from '@/contexts/auth-context'
 import { useTheme } from '@/hooks/use-theme'
 import { router } from 'expo-router'
-import { Text, View } from 'react-native'
+import { Image, Text, View } from 'react-native'
 
 export default function Profile() {
   const { handleLogout, user } = useAuthContext()
@@ -34,11 +34,23 @@ export default function Profile() {
   return (
     <View className="flex-1 bg-background p-8">
       <View className="flex-1">
-        <Text className="text-primary"> {user?.name}</Text>
-        <Text className="text-foreground"> {user?.email}</Text>
-        <Text className="text-foreground">
-          {new Date(user?.created_at || '').toLocaleDateString()}
-        </Text>
+        <View className="flex-col items-center justify-center">
+          <Image
+            source={require('@/assets/isaque-perfil-profissional.png')}
+            className="h-[98px] w-[98px] rounded-full border border-primary"
+          />
+          <View className="items-center justify-center gap-3">
+            <Text className="text-2xl font-bold text-foreground">
+              {user?.name}
+            </Text>
+
+            <Text className="text-muted-foreground"> {user?.email}</Text>
+            <Text className="text-muted">
+              Membro desde maio de{' '}
+              {new Date(user?.created_at || '').getFullYear()}
+            </Text>
+          </View>
+        </View>
         <View className="mt-[100px] flex-1">
           <List
             data={MENU_ITEMS}
