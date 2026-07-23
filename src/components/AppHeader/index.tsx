@@ -1,6 +1,7 @@
 import { useBottomSheetContext } from '@/contexts/bottomsheet-context'
-import { Image, Text, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { AppButton } from '../AppButton'
+import { NewTransaction } from '../NewTransaction'
 
 export function AppHeader() {
   const { openBottomsheet, closeBottomSheet } = useBottomSheetContext()
@@ -14,7 +15,9 @@ export function AppHeader() {
         className="w-auto py-3 "
         onPress={() =>
           openBottomsheet(
-            <Text className="text-white">Testando o testavel</Text>,
+            <>
+              <NewTransaction />
+            </>,
             1,
           )
         }
