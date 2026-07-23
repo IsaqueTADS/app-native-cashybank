@@ -1,11 +1,13 @@
 import { LoadingScreen } from '@/components/LoadingScreen'
+import { Snackbar } from '@/components/Snackbar'
 import { AuthContextProvider, useAuthContext } from '@/contexts/auth-context'
+import { BottomSheetProvider } from '@/contexts/bottomsheet-context'
 import { SnackbarProvider } from '@/contexts/snackbar-context'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { useTheme } from '@/hooks/use-theme'
 import { Stack } from 'expo-router'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import '../global.css'
-import { Snackbar } from '@/components/Snackbar'
 
 function StackLayout() {
   const theme = useTheme()
@@ -27,13 +29,17 @@ function StackLayout() {
 
 export default function RootLayout() {
   return (
-    <SnackbarProvider>
-      <ThemeProvider>
-        <AuthContextProvider>
-          <StackLayout />
-          <Snackbar />
-        </AuthContextProvider>
-      </ThemeProvider>
-    </SnackbarProvider>
+    <GestureHandlerRootView className='flex-1'>
+      <SnackbarProvider>
+        <ThemeProvider>
+          <AuthContextProvider>
+            <BottomSheetProvider>
+              <StackLayout />
+              <Snackbar />
+            </BottomSheetProvider>
+          </AuthContextProvider>
+        </ThemeProvider>
+      </SnackbarProvider>
+    </GestureHandlerRootView>
   )
 }
