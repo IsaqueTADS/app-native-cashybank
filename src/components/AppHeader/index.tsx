@@ -12,7 +12,12 @@ export function AppHeader() {
       />
       <AppButton
         className="w-auto py-3 "
-        onPress={() => openBottomsheet(<Text>Testando o testavel</Text>, 0)}
+        onPress={() =>
+          openBottomsheet(
+            <Text className="text-white">Testando o testavel</Text>,
+            1,
+          )
+        }
       >
         Nova transação
       </AppButton>
