@@ -72,6 +72,12 @@ export function BottomSheetProvider({ children }: React.PropsWithChildren) {
         onChange={handleSheetChanges}
         enablePanDownToClose
         backdropComponent={renderBackdrop}
+        handleIndicatorStyle={{
+          backgroundColor: '#adadad',
+          opacity: 0.3,
+          width: 56,
+          height: 4,
+        }}
         backgroundStyle={{
           backgroundColor: theme.colors.background,
           borderTopLeftRadius: 32,
